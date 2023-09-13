@@ -5,6 +5,51 @@
     左侧是一个赋值语句，字符个数是10，同时该语句从项目启示位置开始，因此，end 就是 start + 10 = 0 + 10 = 10, 而 `;` 的索引是 9，因此，end 的值可以通过 `end = start + 语句字符个数` 计算。
     
 
+## Declarations
+`声明`类型，包括 `FunctionDeclaration` 和 `VariableDeclaration` 子类型。下面详细介绍下。
+
+### FunctionDeclaration
+函数声明，类型定义如下
+```typescript
+    interface FunctionDeclaration extends Declaration, Function {
+        type: 'FunctionDeclaration';
+        id: Identifier;
+    }
+```
+**!!注意**, id 属性不能为 null.
+
+通过一个例子具体看一下 `FunctionDeclaration` 的完整属性定义
+```typescript
+    // demo code
+    function demo() {
+        console.log('i am demo');
+    }
+    // ast 通过 acorn 解析
+    FunctionDeclaration: {
+        type: 'FunctionDeclaration',
+        start: 0,
+        end: 47,
+        id: Identifier,
+        expression: false,
+        generator: false,
+        async: false,
+        params: [],
+        body: BlockStatement
+    }
+```
+除了`FunctionDeclaration`自己定义的两个属性外，还包括了继承的`Function`和`Declaration`属性。
+
+
+
+
+
+## Functions
+
+```typescript
+    interface Function extends Node {}
+```
+
+
 ## Patterns
 
 
